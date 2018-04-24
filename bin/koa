@@ -1,0 +1,20 @@
+const app = require("../app");
+const router = require("koa-router")();
+const container = require("../server/db");
+const port = 3000;
+
+// 中间件
+router.get('/getList', async ( ctx ) => {
+  let st = await container.tests.find();
+  //ctx.body = st;
+  await ctx.render("list", {
+	  title: "列表页",
+	  list: st
+  })
+});
+
+app.use(router.routes(), router.allowedMethods());
+app.listen(port, ()=>{
+	console.log(`Koa start at ${port}`);
+})
+

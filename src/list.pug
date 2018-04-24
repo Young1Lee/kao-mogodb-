@@ -1,0 +1,8 @@
+extends layout
+
+block content
+    h1 列表页
+    ul
+        - var lst= list
+        each val in lst
+            li= val.name
